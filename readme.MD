@@ -7,7 +7,9 @@
 - 仅支持在浏览器环境使用，不支持nodejs环境
 - available only in browser environment only, unavailable in nodejs environment
 
-# 功能演示 Demo Use
+# [在线演示 | playground](https://stackblitz.com/~/github.com/aardpro/crop-image)
+
+# 下载演示 Clone and demo
 ```md
 git clone https://github.com/aardpro/crop-image.git
 cd crop-image
