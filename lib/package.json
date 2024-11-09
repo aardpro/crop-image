@@ -1,0 +1,20 @@
+{
+  "name": "aardpro-crop-image",
+  "version": "1.0.0",
+  "description": "Before uploading an image file or dataURL, crop and optimize it to the specified size and quality.在上传图片文件或者dataURL编码前，对它进行剪裁和优化到指定的尺寸和质量。",
+  "module": "./index.js",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "types": "./index.d.ts"
+    }
+  },
+  "author": "aardpro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aardpro/crop-image/issues"
+  },
+  "homepage": "https://github.com/aardpro/crop-image#readme",
+  "type": "module",
+  "private": false
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cropImage Demo</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="p-4">
+        <div class="py-4">
+          选择一个大的图片文件 | Select one large image file
+        </div>
+        <input type="file" accept="image/*" id="image-input" />
+        <div class="flex-start py-4" style="gap: 1rem; align-items: flex-start">
+          <div class="px-2">
+            <div class="py-4">宽度 | width</div>
+            <input
+              type="number"
+              id="width"
+              placeholder="宽度 | width"
+              class="w-20 ml-2 p-2"
+              value="300"
+              min="0"
+              step="100"
+            />
+            <div class="py-4">高度 | height</div>
+            <input
+              type="number"
+              id="height"
+              placeholder="高度 | height"
+              class="w-20 ml-2 p-2"
+              value="300"
+              min="0"
+              step="100"
+            />
+            <div class="py-4">质量 | quality</div>
+            <input
+              type="number"
+              id="quality"
+              placeholder="质量 | quality"
+              class="w-20 ml-2 p-2"
+              value="0.75"
+              min="0.1"
+              step="0.1"
+              max="1"
+            />
+            <div class="py-4">原点 | origin</div>
+            <select id="origin" class="w-28 ml-2 p-2">
+              <option value="center">中心 | Center</option>
+              <option value="top-left">左上 | Top left</option>
+              <option value="top-right">右上 | Top right</option>
+              <option value="bottom-left">左下 | Bottom left</option>
+              <option value="bottom-right">右下 | Bottom right</option>
+            </select>
+          </div>
+          <div id="result" style="display: none">
+            <div style="margin-bottom: 2rem">
+              <div>使用 cropFile(), 把选择的文件转换成dataURL</div>
+              <div class="py-2">Use cropFile(), convert the selected file to dataURL</div>
+              <img id="image" />
+            </div>
+            <div>
+              <div>使用 cropDataURL(), 把上面的dataURL再次剪裁到其一半尺寸</div>
+              <div class="py-2">
+                Use cropDataURL(), crop the above dataURL to half the size
+              </div>
+              <img id="image-half" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
