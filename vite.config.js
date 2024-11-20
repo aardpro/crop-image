@@ -2,6 +2,8 @@
 import { fileURLToPath } from "url";
 import { resolve } from "path";
 import { defineConfig } from "vite";
+import copy from 'rollup-plugin-copy';
+import terser from '@rollup/plugin-terser';
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
@@ -15,7 +17,22 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      output: {},
+      plugins: [
+        copy({
+          verbose: true,
+          hook: 'writeBundle',
+          targets: [
+            { src: './lib/readme.MD', dest: './dist' },
+            { src: './lib/package.json', dest: './dist' },
+            { src: './lib/index.d.ts', dest: './dist' },
+          ],
+        }),
+      ],
+      output: {
+        plugins: [
+          terser(),
+        ],
+      },
     },
   },
 });
