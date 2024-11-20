@@ -26,13 +26,13 @@ window.onload = async () => {
       const height = divHeight ? parseInt(divHeight.value) : undefined;
       const quality = divQuality ? parseFloat(divQuality.value) : undefined;
       const origin = divOrigin ? divOrigin.value : undefined;
-      const { dataURL, file } = await cropFile(
-        imageInput.files[0],
+      const { dataURL, file } = await cropFile({
+        file: imageInput.files[0],
         width,
         height,
         quality,
-        origin
-      );
+        origin,
+      });
       console.log("🚀 ~ imageInput.addEventListener ~ file:", file);
       const result = document.getElementById("result") as HTMLDivElement | null;
       if (result) {

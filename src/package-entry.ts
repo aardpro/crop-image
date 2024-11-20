@@ -114,21 +114,24 @@ function imageOnload(
 }
 
 /**
- * @description Crops an image file to the specified dimensions and returns the cropped image as a dataURL string, and a File object.
- * @param {File} file - The image file to be cropped.
- * @param {number} [width=300] - The target width for cropping. A value of 0 means no cropping in width.
- * @param {number} [height=300] - The target height for cropping. A value of 0 means no cropping in height.
- * @param {number} [quality=0.75] - The quality of the cropped image.
- * @param {string} [origin='center'] - The origin of the cropping area.valid values are 'center'|'top-left'|'top-right'|'bottom-left'|'bottom-right', default is 'center'.
- * @returns {Promise<{ dataURL: string|false, file: File }>} - A promise that resolves to an object with two properties: dataURL which is the dataURL string of the cropped image, and file which is the cropped image file. If the input is invalid, dataURL will be false.
+ * Crops an image file to the specified size and quality.
+ * @function cropImage
+ * @param {Object} [options] - The options.
+ * @param {File} [options.file] - The image file to crop.
+ * @param {number} [options.width=300] - The target width.
+ * @param {number} [options.height=300] - The target height.
+ * @param {number} [options.quality=0.75] - The target quality (0-1).
+ * @param {string} [options.origin="center"] - The origin position.
+ * @returns {Promise<{dataURL: string | false; file: File}>} - A promise that resolves to an object with a dataURL property and a file property.
  */
-export async function cropFile(
-  file: File,
+
+export async function cropFile({
+  file = new File([], "image_file"),
   width = 300,
   height = 300,
   quality = 0.75,
-  origin = "center"
-): Promise<{ dataURL: string | false; file: File }> {
+  origin = "center",
+}): Promise<{ dataURL: string | false; file: File }> {
   return new Promise((resolve) => {
     const box = document.createElement("div");
     box.style.display = "none";
@@ -196,5 +199,5 @@ export async function cropDataURL({
   if (!fileBlob) {
     return { dataURL: false, file: false };
   }
-  return cropFile(fileBlob, width, height, quality);
+  return cropFile({ file: fileBlob, width, height, quality });
 }
