@@ -11,12 +11,11 @@ export async function dataURLToFile(
   if (!dataURL.startsWith("data:image")) {
     return false;
   }
-  const mimeType = dataURL.split(";")[0].split(":")[1];
   return new Promise((resolve) => {
     fetch(dataURL)
       .then((res) => res.arrayBuffer())
       .then((buf) => {
-        resolve(new File([buf], filename, { type: mimeType }));
+        resolve(new File([buf], filename, { type: "image/webp" }));
       });
   });
 }
@@ -89,7 +88,6 @@ function calculatePositions(
 }
 
 function imageOnload(
-  file: File,
   canvas: HTMLCanvasElement,
   image: HTMLImageElement,
   width: number,
@@ -110,7 +108,7 @@ function imageOnload(
     return false;
   }
   ctx.drawImage(image, ...pst);
-  return canvas.toDataURL(file.type, quality);
+  return canvas.toDataURL("image/webp", quality);
 }
 
 /**
@@ -143,7 +141,6 @@ export async function cropFile({
 
     image.onload = async () => {
       const dataURL = imageOnload(
-        file,
         canvas,
         image,
         width,
@@ -156,7 +153,11 @@ export async function cropFile({
         document.body.removeChild(box);
         return;
       }
-      const fileBlob = await dataURLToFile(dataURL, file.name);
+      const fileExt = file.name.split(".").pop() || "";
+      const fileBlob = await dataURLToFile(
+        dataURL,
+        file.name.replace(new RegExp(`.${fileExt}$`), ".webp")
+      );
       if (!fileBlob) {
         resolve({ dataURL, file });
         document.body.removeChild(box);

@@ -1,6 +1,6 @@
 {
   "name": "crop-image",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Before uploading an image file or dataURL, crop and optimize it to the specified size and quality.在上传图片文件或者dataURL编码前，对它进行剪裁和优化到指定的尺寸和质量。",
   "scripts": {
     "dev": "vite",
